@@ -1,8 +1,10 @@
 const {log, error} = console;
 const getData = async() => {
-const resp =  await fetch (`${app_url}/api/stock/${symbol}/${intraval}`);
-const data = await resp.json();
-return data;
+  const resp =  await fetch (`${app_url}/api/stock/${symbol}/${intraval}`);
+  const data = await resp.json();
+  return data;
+
+
 // log(data);
 
 }
@@ -10,6 +12,8 @@ return data;
 
 const renderChart = async ()=>{
 const chartProperties = {
+  width:1500,
+  height:600,
 timeScale : {
 timeVisible: true,
 secodsVisible: true,
@@ -73,7 +77,7 @@ ema_series.setData(ema_data);
   );
   //RSI
   const rsi_series = chart.addLineSeries({
-    color: 'purple',
+    color: '#2196f3',
     lineWidth: 1,
     pane: 1,
   });

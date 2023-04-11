@@ -2,7 +2,7 @@
 <%- include('layouts/_nav-menu')%>
 <div class="container-fluid">
     <form action="/stock/search" method="get">
-        <div class="row">
+        <div class="row m-4">
             <div class="col-md-2">
                 <select class="form-select" name="symbol">
                     <option value="BTCUSDT">BTCUSDT</option>
@@ -22,33 +22,10 @@
         </div>
     </form>
 </div>
-<div class="row">
-    <!-- <div class="col-md-3 text-center">
-        <h3>SMA</h3>
-        <form action="/stock/sma" method="post">
-            <input type="text" name="name" id="" placeholder="Name" value="<%- smaIndicator.name %>">
-            <input type="text" name="smaSource" id="" placeholder="smaSource"  value="<%- smaIndicator.smaSource %>">
-            <input type="text" name="value" id="" placeholder="value" value="<%- smaIndicator.value %>">
-            <input type="text" name="lineType" id="" placeholder="line type" value="<%- smaIndicator.lineType %>">
-            <input type="text" name="lineThiknes" id="" placeholder="line Thiknes" value="<%- smaIndicator.lineThiknes%>">
-            <input type="color" name="color" id="" value="<%- smaIndicator.color %>">
-            <button type="submit">Apply</button>
-        </form>
-    </div> -->
-    <div class="col-md-12">
 
-        <div id="tvchart"></div>
-    </div>
-</div>
-<script>
-    const app_url = "<%- URL %>";
-    const symbol = "<%- symbol %>";
-    const intraval = "<%- interval %>";
-</script>
 <script>
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
     });
 </script>
 <%- include('layouts/_footer')%>
-<script src="/js/stock.js"></script>

@@ -9,7 +9,7 @@ const smaSchema =mongoose.Schema({
     },
     value:  {
         type: String,
-    },
+    }, 
     color: {
         type: String,
     },

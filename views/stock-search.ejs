@@ -1,0 +1,443 @@
+<%- include('layouts/_header')%>
+<%- include('layouts/_nav-menu')%>
+<div class="container-fluid">
+    <div class="row my-3">
+        <div class="col-md-6">
+            <form action="/stock/search" method="get">
+                <div class="row">
+                    <div class="col-md-3">
+                        <select class="form-select" name="symbol">
+                            <option value="BTCUSDT">BTCUSDT</option>
+                            <option value="LTCBTC">LTCBTC</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select " name="interval">
+                            <option value="1s">1S</option>
+                            <option value="1m">1M</option>
+                            <option value="1d">1D</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+
+                    <!-- <div class="col-md-1">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="macd" value="true" id="macd" >
+                        <label class="form-check-label" for="macd">
+                            MACD
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="rsi" value="true" id="rsi">
+                        <label class="form-check-label" for="rsi">
+                            RSI
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="ema" value="true" id="ema">
+                        <label class="form-check-label" for="ema">
+                            EMA
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="sma" value="true" id="sma">
+                        <label class="form-check-label" for="sma">
+                            SMA
+                        </label>
+                    </div>
+                </div> -->
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#macd">
+                        MACD
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="macd" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="macdLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="macdLabel">MACD Setting</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="post">
+                                        <div class="row">
+                                            <div class="mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="true"
+                                                        id="flexCheckChecked" checked>
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Enable
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="fastLength" class="form-label">Fast Length</label>
+                                                    <input type="number" name="fastLength" min="1"
+                                                        class="form-control" id="fastLength">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="slowLength" class="form-label">Slow Length</label>
+                                                    <input type="number" name="slowLength" min="1"
+                                                        class="form-control" id="slowLength">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="lineWidth" class="form-label">Source</label>
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option value="close">Close</option>
+                                                        <option value="open">Open</option>
+                                                        <option value="high">High</option>
+                                                        <option value="low">Low</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="signalSmoothing" class="form-label">Signal
+                                                        Smoothing</label>
+                                                    <input type="number" name="signalSmoothing" min="1"
+                                                        class="form-control" id="signalSmoothing">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="fastlineWidth" class="form-label">Fast Line
+                                                        Width</label>
+                                                    <input type="number" min="1" name="Widht"
+                                                        class="form-control" id="fastlineWidth">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="fastLineColor" class="form-label">Fast Line
+                                                        Color</label>
+                                                    <input type="color" class="form-control" name="fastLineColor"
+                                                        id="fastLineColor">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="slowlineWidth" class="form-label">Slow Line
+                                                        Width</label>
+                                                    <input type="number" min="1" name="Widht"
+                                                        class="form-control" id="slowlineWidth">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="slowLineColor" class="form-label">Slow Line
+                                                        Color</label>
+                                                    <input type="color" class="form-control" name="slowLineColor"
+                                                        id="slowLineColor">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="histogramUpColor" class="form-label">Histogram Up
+                                                        Color</label>
+                                                    <input type="color" class="form-control"
+                                                        name="histogramUpColor" id="histogramUpColor">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="histogramDownColor" class="form-label">Histogram Down
+                                                        Color</label>
+                                                    <input type="color" class="form-control"
+                                                        name="histogramDownColor" id="histogramDownColor">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">OK</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RSI">
+                        RSI
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="RSI" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="RSILabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="RSILabel">RSI Setting</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="post">
+                                        <div class="row">
+                                            <div class="mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="true"
+                                                        id="flexCheckChecked" checked>
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Enable
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="lenght" class="form-label">RSI Length</label>
+                                                    <input type="number" name="length" min="1"
+                                                        class="form-control" id="lenght">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="lineWidth" class="form-label">RSI Soucre</label>
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option value="close">Close</option>
+                                                        <option value="open">Open</option>
+                                                        <option value="high">High</option>
+                                                        <option value="low">Low</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="lineWidth" class="form-label">Line Width</label>
+                                                    <input type="number" min="1" name="Widht"
+                                                        class="form-control" id="lineWidth">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="color" class="form-label">Color</label>
+                                                    <input type="color" class="form-control" name="color"
+                                                        id="color">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">OK</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EMA">
+                        EMA
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="EMA" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="EMALabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="EMALabel">EMA Setting</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="post">
+                                        <div class="row">
+
+
+                                            <div class="mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="true"
+                                                        id="flexCheckChecked" checked>
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Enable
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="lenght" class="form-label">EMA Length</label>
+                                                    <input type="number" name="length" min="1"
+                                                        class="form-control" id="lenght">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="lineWidth" class="form-label">EMA Soucre</label>
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option value="close">Close</option>
+                                                        <option value="open">Open</option>
+                                                        <option value="high">High</option>
+                                                        <option value="low">Low</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="lineWidth" class="form-label">Line Width</label>
+                                                    <input type="number" min="1" name="Widht"
+                                                        class="form-control" id="lineWidth">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="color" class="form-label">Color</label>
+                                                    <input type="color" class="form-control" name="color"
+                                                        id="color">
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">OK</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SMA">
+                        SMA
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="SMA" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="SMALabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="SMALabel">SMA Setting</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/stock/sma" method="post">
+                                        <div class="row">
+                                            <div class="mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="true"
+                                                        id="flexCheckChecked" checked>
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Enable
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="lenght" class="form-label">SMA Length</label>
+                                                    <input type="number" name="length" min="1"
+                                                        class="form-control" id="lenght">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="smaSoucre" class="form-label">SMA Soucre</label>
+                                                    <select class="form-select" name="smaSoucre" aria-label="Default select example">
+                                                        <option value="close">Close</option>
+                                                        <option value="open">Open</option>
+                                                        <option value="high">High</option>
+                                                        <option value="low">Low</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="lineWidth" class="form-label">Line Width</label>
+                                                    <input type="number" min="1" name="widht"
+                                                        class="form-control" id="lineWidth">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="color" class="form-label">Color</label>
+                                                    <input type="color" class="form-control" name="color"
+                                                        id="color">
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">OK</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="tvchart"></div>
+        </div>
+    </div>
+</div>
+<script>
+    const app_url = "<%- URL %>";
+    const symbol = "<%- symbol %>";
+    const intraval = "<%- interval %>";
+    const macd = "<%- macd %>";
+    const rsi = "<%- rsi %>";
+    const ema = "<%- ema %>";
+    const sma = "<%- sma %>";
+</script>
+
+<script>
+    if ("<%- macd %>" == "true") {
+        document.getElementById("macd").checked = true;
+    }
+    if ("<%- rsi %>" == "true") {
+        document.getElementById("rsi").checked = true;
+    }
+    if ("<%- ema %>" == "true") {
+        document.getElementById("ema").checked = true;
+    }
+    if ("<%- sma %>" == "true") {
+        document.getElementById("sma").checked = true;
+    }
+</script>
+
+<%- include('layouts/_footer')%>
+<script src="/js/stock.js"></script>

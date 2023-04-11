@@ -41,24 +41,25 @@ mongoose.connect(
 app.use(express.static(path.join(__dirname,'/assets')));
 
  app.get('/', (req, res)=>{
+  res.render('index');
    //  res.send("hello");
-   const axios = require("axios");
+  //  const axios = require("axios");
 
-   const options = {
-     method: 'GET',
-     url: 'https://twelve-data1.p.rapidapi.com/price',
-     params: {symbol: 'AAPL', format: 'json', outputsize: '30'},
-     headers: {
-       'X-RapidAPI-Key': '79ed8c18c6msh2579512b15be1c2p19c4d7jsnb3325ddf0951',
-       'X-RapidAPI-Host': 'twelve-data1.p.rapidapi.com'
-     }
-   };
+  //  const options = {
+  //    method: 'GET',
+  //    url: 'https://twelve-data1.p.rapidapi.com/price',
+  //    params: {symbol: 'AAPL', format: 'json', outputsize: '30'},
+  //    headers: {
+  //      'X-RapidAPI-Key': '79ed8c18c6msh2579512b15be1c2p19c4d7jsnb3325ddf0951',
+  //      'X-RapidAPI-Host': 'twelve-data1.p.rapidapi.com'
+  //    }
+  //  };
    
-   axios.request(options).then(function (response) {
-     res.send(response.data);
-   }).catch(function (error) {
-      console.error(error);
-   });
+  //  axios.request(options).then(function (response) {
+  //    res.send(response.data);
+  //  }).catch(function (error) {
+  //     console.error(error);
+  //  });
 
  });
 

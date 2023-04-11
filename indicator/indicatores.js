@@ -7,9 +7,9 @@ const ema_async = promisify(tulind.indicators.ema.indicator);
 const rsi_async = promisify(tulind.indicators.rsi.indicator);
 const macd_async = promisify(tulind.indicators.macd.indicator);
 
-const sma_inc = async (data) => {
+const sma_inc = async (data, stock_val) => {
     const d1 = data.map((d) => d.close);
-    const results = await sma_async([d1], [10]);
+    const results = await sma_async([d1], [stock_val.sma_length]);
     const d2 = results[0];
     const diff = data.length - d2.length;
     const emptyArray = [...new Array(diff)].map((d) => '');
@@ -19,9 +19,9 @@ const sma_inc = async (data) => {
   };
   
   //ema
-  const ema_inc = async (data) => {
+  const ema_inc = async (data, stock_val) => {
     const d1 = data.map((d) => d.close);
-    const results = await ema_async([d1], [50]);
+    const results = await ema_async([d1], [stock_val.ema_length]);
     const d2 = results[0];
     const diff = data.length - d2.length;
     const emptyArray = [...new Array(diff)].map((d) => '');
@@ -31,7 +31,7 @@ const sma_inc = async (data) => {
   };
   
   //market
-  const markers_inc = (data) => {
+  const markers_inc = (data, stock_val) => {
     //EMA21 CROSSOVER SMA100 - LONG
     //EMA21 CROSSUNDER SMA100 - SHORT
     data = data.map((d, i, arr) => {
@@ -49,9 +49,9 @@ const sma_inc = async (data) => {
   };
 
   //rsi
-  const rsi_inc = async (data) => {
+  const rsi_inc = async (data, stock_val) => {
     const d1 = data.map((d) => d.close);
-    const results = await rsi_async([d1], [21]);
+    const results = await rsi_async([d1], [stock_val.rsi_length]);
     const d2 = results[0];
     const diff = data.length - d2.length;
     const emptyArray = [...new Array(diff)].map((d) => '');
@@ -61,9 +61,9 @@ const sma_inc = async (data) => {
   };
 
   //macd
-  const macd_inc = async (data) => {
+  const macd_inc = async (data, stock_val) => {
     const d1 = data.map((d) => d.close);
-    const results = await macd_async([d1], [12, 26, 9]);
+    const results = await macd_async([d1], [stock_val.macd_fast_length, stock_val.macd_slow_length, stock_val.macd_histogram]);
     const diff = data.length - results[0].length;
     const emptyArray = [...new Array(diff)].map((d) => '');
   
