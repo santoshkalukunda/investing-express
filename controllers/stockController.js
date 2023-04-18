@@ -8,6 +8,7 @@ var connection = require('../database.js');
 
 dotenv.config({path:'config.env'});
 const URL = process.env.URL || "http://localhost:3000"
+const API_URL = process.env.API_URL || "http://localhost:8000"
 
 
 
@@ -116,15 +117,19 @@ try {
 const symbol = req.params.symbol;
 const interval= req.params.interval;
 const stock_id= req.params.stock;
-var stock_val;
+var stock = await got(`${API_URL}/api/stock/${stock_id}`);
+const stock_val = JSON.parse(stock.body);
 
+console.log(stock_val.sma_length);
 // connection.connect();
-connection.query(`SELECT * FROM stocks WHERE id = ${stock_id} ORDER BY id desc`, (err, rows, fields) => {
-  if (err) throw err
-  stock_val = rows[0];
-  console.log(stock_val.name);
+// connection.query(`SELECT * FROM stocks WHERE id = ${stock_id} ORDER BY id desc`, (err, rows, fields) => {
+//   if (err) throw err
+//   stock_val = rows[0];
+//   console.log(stock_val.name);
 
-})
+// })
+
+
 function exitHandler(options, err) {
   connection.end();
   if (options.cleanup)
